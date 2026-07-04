@@ -1,0 +1,108 @@
+# Globale Claude Code Regeln — <YOUR_NAME>
+
+Diese Regeln gelten für jede Session, unabhängig vom aktiven Projekt.
+Datei-Speicherort: `~/.claude/CLAUDE.md`
+
+---
+
+## 1. Sprache
+
+Immer auf Deutsch antworten. Technische Begriffe und Code-Bezeichner bleiben in ihrer Originalform (Englisch).
+
+---
+
+## 2. Dotfiles-Backup — Sync nach Datei-Änderungen (optional)
+
+Wenn du deine AI-Tool-Konfigurationen in einem Git-Repo sicherst (empfohlen), trage hier
+das Mapping ein. Claude fragt dann nach jeder Änderung an diesen Dateien:
+
+> „Soll ich die Änderung ins Dotfiles-Repo committen und pushen?"
+
+| Lokale Datei | Dotfiles-Pfad |
+|--------------|---------------|
+| `~/.claude/CLAUDE.md` (diese Datei) | `claude/CLAUDE.md` |
+| `~/.claude/settings.json` | `claude/settings.json` |
+| `~/.claude/commands/*.md` | `claude/commands/` |
+
+**Niemals ohne explizite Bestätigung pushen.**
+
+---
+
+## 3. Keine AI-Identität in Commits/PRs
+
+Niemals Claude, Anthropic, „Claude Code", „Co-Authored-By: Claude" oder andere
+AI-Tool-Referenzen in Commit-Messages, PR-Titeln, PR-Beschreibungen oder Code-Kommentaren verwenden.
+
+---
+
+## 4. Read-only Commands — keine Bestätigung nötig
+
+Die folgenden Kommando-Kategorien sind immer ohne Nachfrage erlaubt:
+
+- **git**: `log`, `status`, `diff`, `branch`, `fetch`, `show`, `remote -v`
+- **Dateisystem**: `ls`, `find`, `cat`, `head`, `tail`, `grep`, `wc`, `stat`
+- **Netzwerk**: `dig`, `curl` (nur GET), `nslookup`
+- **Parsing**: `python3 -c "..."` ausschließlich zur Ausgabe-Formatierung — keine Datei-Schreibzugriffe
+
+---
+
+## 5. Private Infrastruktur (Beispiel — durch eigene Angaben ersetzen)
+
+> ⚠️ Trage hier NUR ein, was Claude wirklich wissen muss — und **niemals Passwörter oder
+> Tokens im Klartext**. Verweise stattdessen auf den Speicherort (z. B. `~/.git-credentials`).
+
+### Eigener Git-Server (falls vorhanden)
+
+- **Host:** `git.<YOUR_GITEA_DOMAIN>` | **User:** `<YOUR_USERNAME>`
+- **Token:** liegt in `~/.git-credentials` (nie im Klartext hier eintragen!)
+- Repos sind **privat** — Token immer erforderlich
+
+**Clone-Beispiel:**
+```bash
+git clone https://<YOUR_USERNAME>:<YOUR_TOKEN>@git.<YOUR_GITEA_DOMAIN>/<YOUR_USERNAME>/<repo>.git
+```
+
+### Heimnetz (nur falls für Claude relevant)
+
+- Beispiel: interner DNS-Server unter `<INTERNAL_IP>`
+- Beispiel: Reverse Proxy unter `<INTERNAL_IP>`
+
+---
+
+## 6. Second Brain — Globaler Kontext
+
+**Second Brain Vault:** `/home/<USER>/second-brain/` (Obsidian Markdown-Vault, Git-backed)
+
+### Automatisches Memory-Laden (bei Start im Second-Brain-Verzeichnis)
+
+Wenn Claude im Second-Brain-Verzeichnis gestartet wird, werden automatisch die
+Vault-Regeln geladen (via `CLAUDE.md` im Vault).
+
+### Globaler Context (immer verfügbar, unabhängig vom Arbeitsverzeichnis)
+
+**Bei Bedarf diese Dateien lesen:**
+
+| Bereich | Datei | Wann lesen |
+|---------|-------|------------|
+| **Profil & Konventionen** | `/home/<USER>/second-brain/claude-memory/00-Profil-und-Konventionen.md` | Bei Fragen zu Sprache, Git-Workflow, Konventionen |
+| **Infrastruktur** | `/home/<USER>/second-brain/claude-memory/01-Infrastruktur.md` | Bei Fragen zu eigenen Rechnern/Servern |
+| **Aktive Projekte** | `/home/<USER>/second-brain/claude-memory/03-Aktive-Projekte.md` | Bei Fragen zu laufenden Projekten |
+| **Tech-Stack** | `/home/<USER>/second-brain/claude-memory/04-Tech-Stack-und-Design.md` | Bei UI/Frontend-Arbeit |
+
+### Graph-View Farb-Gruppen (für neue Notizen)
+
+Wenn neue Notizen im Second Brain erstellt werden, **automatisch passende Farb-Gruppen**
+in `.obsidian/graph.json` hinzufügen:
+
+**Aktuelle Tags & Farben (Beispiel-Taxonomie — an eigene Themen anpassen):**
+
+- `#claude-memory` → Koralle
+- `#infrastruktur` → Türkis/Cyan
+- `#projekt` / `#projekte` → Pink
+- `#devops` → Grün
+- `#wissen` → Grau
+- `#dashboard` → Dunkelrot
+- `#daily` → Violett
+- Fallback (alle Dateien) → Mittelgrau
+
+**Kein Weiß verwenden** — immer eine definierte Farbe für neue Tags!

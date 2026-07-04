@@ -1,0 +1,36 @@
+# Obsidian intern
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/plugins/*/data.json
+
+# Sicherheit - NIEMALS Credentials/Tokens/Secrets committen!
+.env
+*.env
+.env.*
+*.key
+*.pem
+*.secret
+*credentials*
+*token*
+*password*
+*secret*
+*.crt
+*.p12
+*.pfx
+
+# Claude Code Settings (gehört zu ai-dotfiles, kann API-Keys enthalten)
+.claude/
+
+# Skills (werden per npx neu installiert)
+.agents/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claudian Sessions (Gesprächsverlauf, nicht ins Repo)
+.claudian/sessions/
+
+# Obsidian Trash
+.trash/

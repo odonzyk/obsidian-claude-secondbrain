@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Agent",
+      "Task",
+      "Bash(python3 -m json.tool)"
+    ],
+    "defaultMode": "auto"
+  },
+  "effortLevel": "xhigh",
+  "tui": "fullscreen"
+}

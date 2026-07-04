@@ -1,0 +1,7 @@
+{
+  "env": {
+    "EXAMPLE_SITE_URL": "<YOUR_SITE_URL>",
+    "EXAMPLE_USERNAME": "<YOUR_USERNAME>",
+    "EXAMPLE_API_TOKEN": "<YOUR_TOKEN>"
+  }
+}
