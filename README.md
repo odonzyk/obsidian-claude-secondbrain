@@ -1,3 +1,5 @@
+🇩🇪 Deutsche Version | 🇬🇧 **[English version](README.en.md)**
+
 # 🧠 Obsidian + Claude Code — Second Brain
 
 Eine vollständige deutsche Anleitung, um **Obsidian** und **Claude Code** zu einem
